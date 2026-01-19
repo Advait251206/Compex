@@ -22,11 +22,17 @@ const limiter = rateLimit({
 });
 
 // Middleware
-app.use(cors({
-  origin: [
+const getAllowedOrigins = () => {
+  const origins = [
     process.env.FRONTEND_USER_URL || 'http://localhost:5173',
     process.env.FRONTEND_ADMIN_URL || 'http://localhost:5174'
-  ],
+  ];
+  // Remove trailing slashes to ensure exact match with browser origin
+  return origins.map(origin => origin.replace(/\/$/, ""));
+};
+
+app.use(cors({
+  origin: getAllowedOrigins(),
   credentials: true
 }));
 app.use(express.json());
