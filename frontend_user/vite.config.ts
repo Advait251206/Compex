@@ -15,4 +15,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react-dom/client', '@react-three/fiber'],
   },
+  build: {
+    chunkSizeWarningLimit: 1600,
+  },
 })
