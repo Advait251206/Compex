@@ -19,7 +19,9 @@ export const registerValidation = [
   body('holderPhone').trim().optional(),
   body('holderGender').optional(),
   body('holderDob').optional(),
-  body('holderReferralSource').optional()
+  body('holderDob').optional(),
+  body('holderReferralSource').optional(),
+  body('holderBuyingInterest').optional()
 ];
 
 export const otpValidation = [
@@ -127,6 +129,8 @@ export const completeRegistration = async (req: Request, res: Response) => {
     ticket.holderDob = holderDob;
     ticket.holderReferralSource = holderReferralSource;
     ticket.holderReferralDetails = holderReferralDetails;
+    ticket.holderBuyingInterest = req.body.holderBuyingInterest;
+    ticket.holderBuyingInterestDetails = req.body.holderBuyingInterestDetails;
     
     // Identify as verified ticket
     ticket.status = TicketStatus.VERIFIED;

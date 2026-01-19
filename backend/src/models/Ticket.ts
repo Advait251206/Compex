@@ -9,6 +9,8 @@ export interface ITicket extends Document {
   holderDob: Date;
   holderReferralSource?: string;
   holderReferralDetails?: string;
+  holderBuyingInterest?: string;
+  holderBuyingInterestDetails?: string;
   status: TicketStatus;
   isEmailVerified: boolean;
   isCheckedIn: boolean;
@@ -50,6 +52,13 @@ const ticketSchema = new Schema<ITicket>(
       type: String
     },
     holderReferralDetails: {
+      type: String,
+      default: ''
+    },
+    holderBuyingInterest: {
+      type: String
+    },
+    holderBuyingInterestDetails: {
       type: String,
       default: ''
     },

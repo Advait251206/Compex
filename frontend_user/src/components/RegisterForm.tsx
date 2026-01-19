@@ -15,7 +15,9 @@ export default function RegisterForm({ onSuccess }: RegisterProps) {
     dob: '',
     gender: '',
     referralSource: '',
-    referralDetails: ''
+    referralDetails: '',
+    buyingInterest: '',
+    buyingInterestDetails: ''
   });
   const [error, setError] = useState<string | null>(null);
 
@@ -177,7 +179,9 @@ export default function RegisterForm({ onSuccess }: RegisterProps) {
         holderDob: formData.dob,
         holderGender: formData.gender,
         holderReferralSource: formData.referralSource,
-        holderReferralDetails: formData.referralSource === 'Other' ? formData.referralDetails : ''
+        holderReferralDetails: formData.referralSource === 'Other' ? formData.referralDetails : '',
+        holderBuyingInterest: formData.buyingInterest,
+        holderBuyingInterestDetails: formData.buyingInterest === 'Other' ? formData.buyingInterestDetails : ''
       });
       // Pass ticketId from response
       onSuccess(formData.email, formData.name, response.data.ticket.id);
@@ -356,6 +360,44 @@ export default function RegisterForm({ onSuccess }: RegisterProps) {
                  required
                  placeholder="Please specify..."
                  value={formData.referralDetails}
+                 onChange={handleChange}
+                 style={{ padding: '8px 10px', fontSize: '0.9rem' }}
+               />
+            </div>
+          )}
+
+          {/* Buying Interest Section */}
+          <div className="input-group" style={{ marginBottom: 0 }}>
+             <label className="input-label" style={{ marginBottom: '0.2rem', fontSize: '0.8rem' }}>What would you possibly buy?<RequiredStar /></label>
+             <select 
+                 className="form-input"
+                 name="buyingInterest"
+                 value={formData.buyingInterest}
+                 onChange={handleChange}
+                 required
+                 style={{ padding: '8px 10px', fontSize: '0.9rem' }}
+             >
+                 <option value="" disabled>Select Category</option>
+                 <option value="Laptops / Desktops">Laptops / Desktops</option>
+                 <option value="Accessories (Mouse, Keyboard, Audio)">Accessories (Mouse, Keyboard, Audio)</option>
+                 <option value="Printers / Scanners">Printers / Scanners</option>
+                 <option value="CCTV / Security Systems">CCTV / Security Systems</option>
+                 <option value="Smart Gadgets">Smart Gadgets</option>
+                 <option value="Repair / Services">Repair / Services</option>
+                 <option value="Just Browsing">Just Browsing</option>
+                 <option value="Other">Other</option>
+             </select>
+          </div>
+
+          {formData.buyingInterest === 'Other' && (
+            <div className="input-group" style={{ marginBottom: 0, animation: 'fadeIn 0.3s ease-out' }}>
+               <input 
+                 className="form-input" 
+                 type="text" 
+                 name="buyingInterestDetails"
+                 required
+                 placeholder="Please specify..."
+                 value={formData.buyingInterestDetails}
                  onChange={handleChange}
                  style={{ padding: '8px 10px', fontSize: '0.9rem' }}
                />
